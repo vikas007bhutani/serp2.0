@@ -1,0 +1,161 @@
+<p-dialog header="Cashier’s Payment Desk" [(visible)]="display" styleClass="fusll-screen-dialog">
+  <form #cashierPaymentDesk="ngForm" novalidate (ngSubmit)="payFee()" autocomplete="off">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <p-autoComplete required [suggestions]="results" minLength="3"
+                          name="userCode" #userCode placeholder="Search student" field="studentId"
+                          (completeMethod)="searchStudent($event)" (onSelect)="onStudentSelect($event)"
+                          (onClear)="onClear($event)">
+            <ng-template let-student pTemplate="item">
+              <div>{{student.userCode}} - {{student.userName}}</div>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+    <p-fieldset #infoFieldset legend="Student Info" [toggleable]="true">
+      <div>
+        <div class="row">
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Roll Number</label>
+              <input class="form-control" name="rollNumber" [ngModel]="userInfo.rollNumber" readonly />
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Student Name</label>
+              <input class="form-control" name="userName" [ngModel]="userInfo.userName" readonly />
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Father Name</label>
+              <input class="form-control" name="fatherName" [ngModel]="userInfo.fatherName" readonly />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Class</label>
+              <input class="form-control" name="studentClass" [ngModel]="userInfo.studentClass" readonly />
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Section</label>
+              <input class="form-control" name="section" [ngModel]="userInfo.section" readonly />
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Course Detail</label>
+              <input class="form-control" name="course" [ngModel]="userInfo.course" readonly />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8 col-xs-12">
+            <div class="form-group">
+              <label>Select Month(s)</label>
+              <p-multiSelect [options]="months" [(ngModel)]="selectedMonths"
+                             (onChange)="onMonthChange($event)" name="selectedMonths" optionLabel="label"></p-multiSelect>
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12">
+            <div class="form-group">
+              <label>Payment Date</label>
+              <input class="form-control" name="paymentDate" [(ngModel)]="payment.paymentDate" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <p-fieldset #feeFieldset legend="Fee Details" [toggleable]="true">
+            <div class="row" *ngIf="payment.feeSections && payment.feeSections.length > 0">
+              <div class="col-sm-4 col-xs-12" *ngFor="let section of feeSections; let i = index">
+                <div class="form-group">
+                  <label>{{section.feeType}}</label>
+                  <input type="number" class="form-control" [name]="section.feeType" [(ngModel)]="payment.feeSections[i].paidAmount" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Total Fee Amount</label>
+                  <input type="number" class="form-control" name="totalFeeAmount" [value]="getTotalFeeAmount()" readonly />
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Total Dues</label>
+                  <input type="number" class="form-control" name="totalDues" [(ngModel)]="payment.totalDues" readonly />
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Fee Concession Amount</label>
+                  <input type="number" class="form-control" name="feeConcessionAmount" [(ngModel)]="payment.feeConcessionAmount" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Amount To Pay</label>
+                  <input type="number" class="form-control" name="amountToPay" [value]="getAmountToPay()" readonly />
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Paid Amount</label>
+                  <input type="number" class="form-control" name="paidAmount" [(ngModel)]="payment.paidAmount" />
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label>Balance Amount</label>
+                  <input type="number" class="form-control" name="balanceAmount" [value]="getBalanceAmount()" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-xs-12">
+                <div class="form-group">
+                  <label>Payment Mode</label>
+                  <div class="form-control">
+                    <label class="radio-inline">
+                      <input type="radio" name="paymentMode" value="1"
+                             [(ngModel)]="payment.paymentMode" />&nbsp;Cash
+                    </label>&nbsp;&nbsp;
+                    <label class="radio-inline">
+                      <input type="radio" name="paymentMode" value="2"
+                             [(ngModel)]="payment.paymentMode" />&nbsp;Check/DD
+                    </label>&nbsp;&nbsp;
+                    <label class="radio-inline">
+                      <input type="radio" name="paymentMode" value="3"
+                             [(ngModel)]="payment.paymentMode" />Debit/Credit
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-12"
+                   *ngIf="payment.paymentMode == '2' || payment.paymentMode == '3'">
+                <div class="form-group">
+                  <label>Payment Reference</label>
+                  <input class="form-control" name="paymentReference" [(ngModel)]="payment.paymentReference" />
+                </div>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-footer>
+      <button type="submit" pButton icon="fa-check" label="Pay" [disabled]="!payment.paymentMode"></button>
+      <button type="button" pButton icon="fa-close" (click)="display=false" label="Cancel"></button>
+    </p-footer>
+  </form>
+</p-dialog>

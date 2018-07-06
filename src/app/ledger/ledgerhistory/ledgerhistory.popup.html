@@ -1,0 +1,61 @@
+<p-dialog header="{{header}}" [(visible)]="display" [modal]="true" [responsive]="true" [showIcon]="true" [minY]="70">
+  <div>    
+    <div class="m-content">
+      <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+
+          <div class="row align-items-center">
+            <!--<Primeng-Datatable-Start>-->
+            <div class="primeng-datatable-container">
+              <p-dataTable #dataTable
+                           (onLazyLoad)="getLedgersHistory($event)"
+                           [value]="primengDatatableHelper.records"
+                           rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                           [paginator]="false"
+                           [lazy]="true"
+                           emptyMessage="No Records Found."
+                           scrollable="true"
+                           ScrollWidth="80%"
+                           responsive="primengDatatableHelper.isResponsive"
+                           resizableColumns="primengDatatableHelper.resizableColumns"
+                           [loading]="primengDatatableHelper.isLoading"
+                           loadingIcon="fa-spinner"
+                           frozenWidth="100px"
+                           expandableRows="true">
+
+
+                <p-column field="id" header="Ledger Id"></p-column>
+                <p-column field="" header="Payment Date">
+                  <ng-template let-col="rowData" pTemplate="body">
+                    {{col.paymentDate|date: 'MM/dd/yyyy' }}
+                  </ng-template>
+                </p-column>
+                <p-column field="departmentName" header="Department"></p-column>
+                <p-column field="activity" header="Activity"></p-column>
+                <p-column field="totalAllocatedAmount" header="Allocated"></p-column>
+                <p-column field="totalPaidAmount" header="Paid"></p-column>
+                <p-column field="totalBalanceAmount" header="Balance"></p-column>
+                <p-column field="remarks" header="Remark"></p-column>
+
+
+              </p-dataTable>
+              <div class="primeng-paging-container">
+                <p-paginator rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                             #paginator
+                             (onPageChange)="getLedgersHistory($event)"
+                             [totalRecords]="primengDatatableHelper.totalRecordsCount"
+                             [rowsPerPageOptions]="primengDatatableHelper.predefinedRecordsCountPerPage">
+                </p-paginator>
+                <span class="total-records-count">
+                  Total: {{primengDatatableHelper.totalRecordsCount}}
+                </span>
+              </div>
+            </div>
+            <!--<Primeng-Datatable-End>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</p-dialog>

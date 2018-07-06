@@ -1,0 +1,100 @@
+<div>
+  <div class="m-subheader">
+    <div class="d-flex align-items-center">
+      <div class="mr-auto col-sm-12 col-md-8">
+        <h3 class="m-subheader__title m-subheader__title--separator">
+          <span>Ledger</span>
+        </h3>
+      </div>
+      <div class="col-sm-12 col-md-2">
+        <button (click)="editaddledger.show()"
+                class="ui-button ui-widget ui-corner-all ui-button-text-icon-left">
+          <span class="ui-button-icon-left fa fa-fw fa-plus"></span>
+          <span class="ui-button-text">Add Ledger</span>
+        </button>
+      </div>
+      <div class="col-sm-12 col-md-2 text-right">
+        <select (change)="onSelect($event.target.value)" class="form-control" [(ngModel)]="selectedItem">
+          <option *ngFor="let option of ledgerOptions" value={{option.Id}}>
+            {{option.Label}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+
+        <div class="row align-items-center">
+          <!--<Primeng-Datatable-Start>-->
+          <div class="primeng-datatable-container">
+            <p-dataTable #dataTable
+                         (onLazyLoad)="getLedgers($event)"
+                         [value]="primengDatatableHelper.records"
+                         rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                         [paginator]="false"
+                         [lazy]="true"
+                         emptyMessage="No Data"
+                         scrollable="true"
+                         ScrollWidth="99%"
+                         responsive="primengDatatableHelper.isResponsive"
+                         [loading]="primengDatatableHelper.isLoading"
+                         loadingIcon="fa-spinner"
+                         frozenWidth="100px"
+                         resizableColumns="primengDatatableHelper.resizableColumns">
+
+
+              <p-column field="" header="Ledger Id">
+                <ng-template let-row="rowData" pTemplate="body">
+                  <a style="color:blue;" (click)="ledgerHistory.show(row)">{{row.id}}</a>
+                </ng-template>
+              </p-column>
+              <p-column field="" header="Payment Date">
+                <ng-template let-col="rowData" pTemplate="body">
+                  {{col.paymentDate|date: 'MM/dd/yyyy' }}
+                </ng-template>
+              </p-column>
+              <p-column field="departmentName" header="Department"></p-column>
+              <p-column field="activity" header="Activity"></p-column>
+              <p-column field="totalAllocatedAmount" header="Allocated"></p-column>
+              <p-column field="totalPaidAmount" header="Paid"></p-column>
+              <p-column field="totalBalanceAmount" header="Balance"></p-column>
+              <p-column field="remarks" header="Remark">
+              </p-column>
+              <p-column field=""
+                        header="Actions"
+                        [sortable]="false"
+                        [style]="{'width':'130px','text-align':'center'}">
+                <ng-template   let-record="rowData"  pTemplate="body">
+                  <a (click)="editaddledger.show(record)"><i *ngIf="userId==record.createdBy" class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                </ng-template>
+              </p-column>
+            </p-dataTable>
+            <div class="primeng-paging-container">
+              <p-paginator rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                           #paginator
+                           (onPageChange)="getLedgers($event)"
+                           [totalRecords]="primengDatatableHelper.totalRecordsCount"
+                           [rowsPerPageOptions]="primengDatatableHelper.predefinedRecordsCountPerPage">
+              </p-paginator>
+              <span class="total-records-count">
+                Total: {{primengDatatableHelper.totalRecordsCount}}
+              </span>
+            </div>
+          </div>
+          <!--<Primeng-Datatable-End>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <edit-add-ledger #editaddledger (onSaved)="getLedgers()"></edit-add-ledger>
+
+  <ladgerhistory #ledgerHistory></ladgerhistory>
+
+
+
+
+</div>

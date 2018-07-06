@@ -1,0 +1,82 @@
+<p-dialog header="{{header}}" [(visible)]="display" [modal]="true" [responsive]="true" [showIcon]="true"  [minY]="70">
+  <div>
+    <div class="m-content">
+      <div class="d-flex align-items-center">
+        <div class="col-sm-12 col-md-2 text-left">
+
+          <b> <span>User Code: </span></b> {{rowdetails.userCode}}
+        </div>
+        <div class="col-sm-12 col-md-2 text-left">
+
+          <b> <span>Class: </span></b> {{rowdetails.className}}
+        </div>
+        <div class="col-sm-12 col-md-2 text-left">
+          <b> <span>Section: </span></b> {{rowdetails.sectionName}}
+
+        </div>
+        <div class="col-sm-12 col-md-2 text-left">
+          <b> <span>Roll Number: </span></b> {{rowdetails.rollNumber}}
+
+        </div>
+
+      </div>
+    </div>
+    <div class="m-content">
+      <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+
+          <div class="row align-items-center">
+            <!--<Primeng-Datatable-Start>-->
+            <div class="primeng-datatable-container">
+              <p-dataTable #dataTable
+                           (onLazyLoad)="getPaymenthistory($event)"
+                           [value]="primengDatatableHelper.records"
+                           rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                           [paginator]="false"
+                           [lazy]="true"
+                           emptyMessage="No Records Found."
+                           scrollable="true"
+                           ScrollWidth="80%"
+                           responsive="primengDatatableHelper.isResponsive"
+                           resizableColumns="primengDatatableHelper.resizableColumns"
+                           [loading]="primengDatatableHelper.isLoading"
+                           loadingIcon="fa-spinner"
+                           frozenWidth="100px"
+                           expandableRows="true">
+
+
+                <!--<p-column field="userCode" header="User Code" [style]="{'width':'120px'}">                  
+                </p-column>
+                <p-column field="firstName" header="First Name" [style]="{'width':'120px'}"></p-column>
+                <p-column field="lastName" header="Middle Name" [style]="{'width':'120px'}"></p-column>
+                <p-column field="className" header="Class Name" [style]="{'width':'150px'}"></p-column>
+                <p-column field="sectionName" header="Section Name" [style]="{'width':'120px'}"></p-column>-->
+                <p-column field="paidAmount" header="Paid Amount"></p-column>
+                <!--<p-column field="rollNumber" header="Roll Number" [style]="{'width':'80px'}"></p-column>-->
+                <p-column field="feeMonth" header="Fee Month"></p-column>
+                <p-column field="paymentDate" header="Payment Date"></p-column>
+                <p-column *ngIf="admin" field="name" header="Update/View"></p-column>
+                <p-column *ngIf="admin" field="surname" header="Account Status"></p-column>
+
+
+              </p-dataTable>
+              <div class="primeng-paging-container">
+                <p-paginator rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                             #paginator
+                             (onPageChange)="getPaymenthistory($event)"
+                             [totalRecords]="primengDatatableHelper.totalRecordsCount"
+                             [rowsPerPageOptions]="primengDatatableHelper.predefinedRecordsCountPerPage">
+                </p-paginator>
+                <span class="total-records-count">
+                  Total: {{primengDatatableHelper.totalRecordsCount}}
+                </span>
+              </div>
+            </div>
+            <!--<Primeng-Datatable-End>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </p-dialog>

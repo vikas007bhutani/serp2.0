@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light default-color scrolling-navbar" [containerInside]="false">
+        <logo>
+            <a class="logo navbar-brand white-text" href="#"><strong>Tracolearn</strong></a>
+        </logo>
+        <links>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item waves-light" [routerLinkActive]="['active']" mdbRippleRadius>
+              <a class="nav-link white-text" [routerLink]="['/landing', {outlets: {'outlet': ['dashboard']}}]">Dashboard</a>
+            </li>
+            <li class="nav-item waves-light" [routerLinkActive]="['active']" mdbRippleRadius>
+              <a class="nav-link white-text" [routerLink]="['/landing', {outlets: {'outlet': ['user']}}]">Users</a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+              <a class="nav-link white-text" [routerLink]="['/landing', {outlets: {'outlet': ['payments']}}]">Payments</a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+              <a class="nav-link white-text" [routerLink]="['/landing', {outlets: {'outlet': ['paymenthistory']}}]">Payment History</a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+              <a class="nav-link white-text" [routerLink]="['/landing', {outlets: {'outlet': ['ledger']}}]">Ledger</a>
+            </li>           
+            <li class="nav-item waves-light" mdbRippleRadius>
+              <a class="nav-link white-text" [routerLink]="['/landing', {outlets: {'outlet': ['feeallocation']}}]">Fee Allocation</a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+              <a class="nav-link white-text">Quick Messanger</a>
+            </li>
+          </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a class="nav-link white-text"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a class="nav-link white-text"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a class="nav-link white-text"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </links>
+      </mdb-navbar>
+</div>

@@ -1,0 +1,158 @@
+
+	<p-dialog   header="{{header}}" [(visible)]="display" [responsive]="true" [showIcon]="true" [width]="900" [minWidth]="900" [minHeight]="800"  [minY]="70">
+  <html>
+	  <head>
+			<link type="text/css" rel="stylesheet" href="../../../assets/Print/css/bootstrap.min.css" media="print">
+		</head>
+	  <body>
+	<div class="container" id="print-content" style="margin-top: 4vh; margin-bottom: 4vh;">
+		<div class="row">	
+			<div id="invoice" class="well offset-sm-3 col-sm-12" >
+		
+				<div class="row">
+					<div class="col-sm-2">
+						<img id="schoolLogo" src="../../../assets/Print/assests/school.png" alt="School Logo" />						
+					</div>
+					<div class="col-sm-10">
+						<h1 id="schoolName">
+								{{schoolname}}
+						</h1>
+						<p id="schoolAddress" class="smallText">
+								{{schooladdress}}
+						</p>
+						<p id="affnWeb" class="smallText">
+							<span id="affiliation">Affiliation : </span><span id="affiliationNo">{{affiliationno}}</span>
+						</p>
+						<p id="phoneEmail" class="smallText">
+							<span class="icon"><img src="../../../assets/Print/assests/mobile.svg"></span>	
+							<span id="phone">{{schoolphone}}</span>
+							
+							<span class="icon"><img src="../../../assets/Print/assests/email.svg"></span>		
+							<span id="email">{{schoolemail}}</span>
+						</p>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div id="invoiceMain" class="col-sm-12">
+						<div class="row">
+							<div id="left" class="col-sm-6">
+								<p class="details">
+									<label class="field">Student ID</label>
+									<span class="seperator">:</span>
+									<span class="value">{{studentid}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Student's Name</label>
+									<span class="seperator">:</span>
+									<span class="value" >{{studentname}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Class</label>
+									<span class="seperator">:</span>
+									<span class="value">{{stuclass}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Section</label>
+									<span class="seperator">:</span>
+									<span class="value">{{section}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Roll No.</label>
+									<span class="seperator">:</span>
+									<span class="value">{{rollnumber}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Father's Name</label>
+									<span class="seperator">:</span>
+									<span class="value">{{fathername}}</span>
+								</p>
+							</div>
+							
+							<div id="right" class="col-sm-6">
+								<p class="details">
+									<label class="field">Invoice No.</label>
+									<span class="seperator">:</span>
+									<span class="value">{{invoicenumber}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Date</label>
+									<span class="seperator">:</span>
+									<span class="value">{{billingdate | date: 'dd/MM/yyyy'}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Month</label>
+									<span class="seperator">:</span>
+									<span class="value" *ngFor="let months of paymentmonth">{{ months+','}}</span>
+								</p>
+								<p class="details">
+									<label class="field">Mode</label>
+									<span class="seperator">:</span>
+									<span class="value">Cash</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div id="feeTable" class="col-sm-18">
+						<table class="table table-bordered">
+  							<thead class="thead-light">
+  							  <tr>
+  							    <th scope="col">FEE Type</th>
+  							    <th scope="col" type="value">Amount</th>
+  							   
+  							  </tr>
+  							</thead>
+  							<tbody>
+  								<tr *ngFor="let col of sectionvalue" >
+  							    	<th scope="row">{{col.ftype}}</th>
+  							    	<td>{{col.feevalue}}</td>
+  							    	
+  							  	</tr>
+									<tr>
+										<th scope="row">Dues</th>
+										<td>0</td>
+												
+									  </tr>
+								<tr>
+  							    	<th scope="row">Total</th>
+  							    	<td>{{totalamount}}</td>
+  							    			
+  							  	</tr>
+  							</tbody>
+						</table>
+						<p id="grandTotal" style="padding: 0.6rem;">
+							<span id="total">Grand Total : </span>
+							<span id="totalValue" style="float:right; font-weight: 500;">2800</span>
+						</p>
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div id="footer" class="col-sm-12">
+						<p id="cashier">
+							<span type="cashier">Cashier :</span>
+							<span id="cashierName">{{cashiername}}</span>
+						</p><hr>
+						<p id="bottom">
+							This is a computer generated invoice, no signature is required.
+						</p>
+					</div>
+				</div>
+		
+			</div>
+		
+		</div>	
+	</div>
+</body>
+
+
+</html>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="print()"  label="Print"></button>
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="Cancel"></button>
+  </p-footer>
+  
+</p-dialog>

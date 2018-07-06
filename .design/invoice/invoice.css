@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+#invoice {
+	padding: 6vh 4vw;
+	border-radius: 4px;
+	border: 1px solid #e6e6e6;
+}
+
+#schoolLogo{
+	width: 70px;
+}
+
+#schoolName {
+	text-align: center;
+	font-size: 1.6045rem;
+	font-weight: 500;
+	text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.smallText {
+	font-size: 0.81rem;
+	line-height: 1.5;
+	color: #555555;
+	letter-spacing: 0.2px;
+	text-align: center;
+	margin-bottom: 0.2vh;
+}
+
+.icon img{
+	width: 16px;
+}
+
+.icon {
+	position: relative;
+	top: -1px;
+	margin-right: 4px;
+}
+
+#phone {
+	margin-right: 40px;
+}
+
+#invoiceMain {
+	margin-top: 6vh;
+}
+
+.details {
+	font-size: 0.9rem;
+	margin-bottom: 0.9vh;
+}
+
+.field {
+	width: 140px;
+	margin-bottom: 0;
+	color: #555;
+}
+
+.seperator {
+	margin-right: 5px;
+}
+
+.value {
+	font-weight: 500;
+	color: #333;
+}
+
+#feeTable {
+	margin-top: 4vh;
+}
+
+table {
+	font-size: 0.9rem;
+}
+
+.table td, .table th {
+	padding: .5rem;
+}
+
+th {
+	font-weight: 500;
+}
+
+th[type="value"] {
+	width: 12vw;
+}
+
+#grandTotal, #cashier {
+	font-size: 0.9rem;
+}
+
+#bottom {
+	font-style: italic;
+	font-size: 0.86rem;
+	text-align: center;
+	color: #555;
+}

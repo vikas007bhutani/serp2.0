@@ -1,0 +1,215 @@
+<p-dialog header="Update User" [(visible)]="showUpdateUser" [modal]="true" [responsive]="true" [showIcon]="true" >
+  <form name="updateUserForm" [formGroup]="updateUserForm" (ngSubmit)="updateUser()" novalidate autocomplete="off">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>First Name</span>
+        <input class="form-control" name="firstName" formControlName="firstName" [(ngModel)]="userProfileDetails.firstName" placeholder="First Name"
+        />
+        <div *ngIf="!updateUserForm.get('firstName').valid && updateUserForm.get('firstName').dirty && updateUserForm.get('firstName').errors.required"
+          class="alert alert-danger">
+          First Name is required.
+        </div>
+        <div *ngIf="!updateUserForm.get('firstName').valid && updateUserForm.get('firstName').dirty && updateUserForm.get('firstName').errors.maxlength"
+          class="alert alert-danger">
+          Max 50 characters allowed.
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Middle Name</span>
+        <input class="form-control" name="middleName" formControlName="middleName" [(ngModel)]="userProfileDetails.middleName" placeholder="Middle Name"
+        />
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Last Name</span>
+        <input class="form-control" name="lastName" formControlName="lastName" [(ngModel)]="userProfileDetails.lastName" placeholder="Last Name"
+        />
+        <div *ngIf="!updateUserForm.get('lastName').valid && updateUserForm.get('lastName').dirty && updateUserForm.get('lastName').errors.required"
+          class="alert alert-danger">
+          Last Name is required.
+        </div>
+        <div *ngIf="!updateUserForm.get('lastName').valid && updateUserForm.get('lastName').dirty && updateUserForm.get('lastName').errors.maxlength"
+          class="alert alert-danger">
+          Max 50 characters allowed.
+        </div>
+      </div>
+
+    </div>
+    <div class="row" *ngIf="userProfileDetails.studentDetail != null || userProfileDetails.studentDetail != undefined">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Class</span>
+        <select class="form-control" name="studentClass" formControlName="studentClass" [(ngModel)]="userProfileDetails.studentDetail.classID">
+          <option *ngFor="let class of classes" [ngValue]="class.id">{{class.value}}</option>
+        </select>
+        <div *ngIf="!updateUserForm.get('studentClass').valid && updateUserForm.get('studentClass').touched" class="alert alert-danger">
+          Please select Class
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Section</span>
+        <select class="form-control" name="studentSection" formControlName="studentSection" [(ngModel)]="userProfileDetails.studentDetail.sectionID">
+          <option *ngFor="let section of sections" [ngValue]="section.id">{{section.value}}</option>
+        </select>
+        <div *ngIf="!updateUserForm.get('studentSection').valid && updateUserForm.get('studentSection').touched" class="alert alert-danger">
+          Please select section
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Roll Number</span>
+        <input class="form-control" name="rollNumber" formControlName="rollNumber" [(ngModel)]="userProfileDetails.studentDetail.rollNumber"
+          placeholder="Roll Number" />
+        <div *ngIf="!updateUserForm.get('rollNumber').valid && updateUserForm.get('rollNumber').dirty && updateUserForm.get('rollNumber').errors.required"
+          class="alert alert-danger">
+          Roll Number is required.
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="userProfileDetails.staff != null || userProfileDetails.staff != undefined">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <span>Class Teacher</span>
+        <select class="form-control" name="facultyClass" formControlName="facultyClass" [(ngModel)]="userProfileDetails.staff.assignedClassID">
+          <option *ngFor="let class of classes" [ngValue]="class.id">{{class.value}}</option>
+        </select>
+        <div *ngIf="!updateUserForm.get('facultyClass').valid && updateUserForm.get('facultyClass').touched" class="alert alert-danger">
+          Please select Class
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <span>Section</span>
+        <select class="form-control" name="facultySection" formControlName="facultySection" [(ngModel)]="userProfileDetails.staff.AssignedSectionID">
+          <option *ngFor="let section of sections" [ngValue]="section.id">{{section.value}}</option>
+        </select>
+        <div *ngIf="!updateUserForm.get('facultySection').valid && updateUserForm.get('facultySection').touched" class="alert alert-danger">
+          Please select section
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Email</span>
+        <input class="form-control" disabled="disabled" name="email" formControlName="email" [(ngModel)]="userProfileDetails.email"
+          placeholder="Email" />
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <span>Contact Number</span>
+        <input class="form-control" disabled="disabled" name="contact" formControlName="contact" [(ngModel)]="userProfileDetails.mobile"
+          placeholder="Contact Number" />
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+          <span>Date Of Birth</span>
+        <p-calendar [(ngModel)] ="userProfileDetails.dob" name ="dateOfBirth" formControlName="dateOfBirth"  dataType ="string"></p-calendar>
+      </div>
+    </div>
+    <p-footer>
+      <button type="submit" pButton icon="fa-check" label="Submit"></button>
+      <button type="button" pButton icon="fa-close" (click)="cancelUpdate()" label="Cancel"></button>
+    </p-footer>
+  </form>
+</p-dialog>
+
+<div>
+  <div class="m-subheader">
+    <div class="d-flex align-items-center">
+      <div class="mr-auto col-sm-12 col-md-10 col-lg-10">
+        <h3 class="m-subheader__title m-subheader__title--separator">
+          <span>Users</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+        <p-tabView>
+          <p-tabPanel header="Students">
+            <div class="row align-items-center">
+              <!--<Primeng-Datatable-Start>-->
+              <div class="primeng-datatable-container">
+                <p-dataTable #dataStudentTable (onLazyLoad)="getAllStudents($event)" [value]="primengDatatableHelper.records" rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                  [paginator]="false" [lazy]="true" emptyMessage="No Data" scrollable="true" ScrollWidth="80%" [loading]="primengDatatableHelperStaff.isLoading"
+                  responsive="primengDatatableHelper.isResponsive" resizableColumns="primengDatatableHelper.resizableColumns"
+                  loadingIcon="fa-spinner">
+
+                  <p-column [sortable]="true" field="userCode" header="User Code"></p-column>
+                  <p-column [sortable]="true" field="firstName" header="Student First Name"></p-column>
+                  <p-column [sortable]="true" field="lastName" header="Student Last Name"></p-column>
+                  <p-column [sortable]="true" field="mobile" header="Parent's Mobile"></p-column>
+                  <p-column [sortable]="true" field="email" header="Email"></p-column>
+                  <p-column [sortable]="true" field="className" header="Class"></p-column>
+                  <p-column [sortable]="true" field="sectionName" header="Section"></p-column>
+                  <p-column [sortable]="true" field="rollNumber" header="Roll Number"></p-column>
+                  <p-column *ngIf="isAdmin" field="userId" header="Update/View">
+                    <ng-template let-data="rowData" pTemplate="body">
+                      <a (click)="showUserProfile(data.userId)">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      </a>
+                    </ng-template>
+                  </p-column>
+                  <p-column *ngIf="isAdmin" field="activeStatus" header="Account Status">
+                    <ng-template let-data="rowData" pTemplate="body">
+                      <p-inputSwitch [(ngModel)]="data.activeStatus" (onChange)="userStatusChanged($event,data.userId)"></p-inputSwitch>
+                    </ng-template>
+                  </p-column>
+
+                </p-dataTable>
+                <div class="primeng-paging-container">
+                  <p-paginator rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}" #studentpaginator (onPageChange)="getAllStudents($event)"
+                    [totalRecords]="primengDatatableHelper.totalRecordsCount" [rowsPerPageOptions]="primengDatatableHelper.predefinedRecordsCountPerPage">
+                  </p-paginator>
+                  <span class="total-records-count">
+                    Total: {{primengDatatableHelper.totalRecordsCount}}
+                  </span>
+                </div>
+              </div>
+              <!--<Primeng-Datatable-End>-->
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Staff">
+            <div class="row align-items-center">
+              <!--<Primeng-Datatable-Start>-->
+              <div class="primeng-datatable-container">
+                <p-dataTable #dataStaffTable (onLazyLoad)="getAllStaffs($event)" [value]="primengDatatableHelperStaff.records" rows="{{primengDatatableHelperStaff.defaultRecordsCountPerPage}}"
+                  [paginator]="false" [lazy]="true" emptyMessage="No Data" scrollable="true" ScrollWidth="80%" [loading]="primengDatatableHelperStaff.isLoading"
+                  responsive="primengDatatableHelperStaff.isResponsive" resizableColumns="primengDatatableHelperStaff.resizableColumns"
+                  loadingIcon="fa-spinner">
+
+                  <p-column field="userCode" header="User Code"></p-column>
+                  <p-column field="firstName" header="First Name"></p-column>
+                  <p-column field="lastName" header="Last Name"></p-column>
+                  <p-column field="mobile" header="Mobile"></p-column>
+                  <p-column field="email" header="Email"></p-column>
+                  <p-column field="assignedClass" header="Assigned Class"></p-column>
+                  <p-column field="assignedSection" header="Assigned Section"></p-column>
+                  <p-column field="speciality" header="Speciality"></p-column>
+                  <p-column field="employeeCategory" header="Employee Category"></p-column>
+                  <p-column *ngIf="isAdmin" field="userId" header="Update/View">
+                    <ng-template let-data="rowData" pTemplate="body">
+                      <a (click)="showUserProfile(data.userId)">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      </a>
+                    </ng-template>
+                  </p-column>
+                  <p-column *ngIf="isAdmin" field="activeStatus" header="Account Status">
+                    <ng-template let-data="rowData" pTemplate="body">
+                      <p-inputSwitch [(ngModel)]="data.activeStatus"></p-inputSwitch>
+                    </ng-template>
+                  </p-column>
+
+                </p-dataTable>
+                <div class="primeng-paging-container">
+                  <p-paginator rows="{{primengDatatableHelperStaff.defaultRecordsCountPerPage}}" #staffpaginator (onPageChange)="getAllStaffs($event)"
+                    [totalRecords]="primengDatatableHelperStaff.totalRecordsCount" [rowsPerPageOptions]="primengDatatableHelperStaff.predefinedRecordsCountPerPage">
+                  </p-paginator>
+                  <span class="total-records-count">
+                    Total: {{primengDatatableHelperStaff.totalRecordsCount}}
+                  </span>
+                </div>
+              </div>
+              <!--<Primeng-Datatable-End>-->
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,57 @@
+<p-dialog header="{{header}}" [(visible)]="display" [modal]="true" [responsive]="true" [showIcon]="true" [minY]="70">
+  <form #organizationForm="ngForm" novalidate (ngSubmit)="createLedger()" autocomplete="off">
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label>Payment Date *</label>
+          <p-calendar [(ngModel)]="date" name="calendar" dataType="string"></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label>Department *</label>
+          <select #department="ngModel" disabled="{{enabledisabled}}" (change)="onSelect($event.target.value)" name="Department" class="form-control" [(ngModel)]="id" required>
+            <option *ngFor="let dep of departments" [value]="dep.id">{{dep.value}}</option>
+          </select>
+          <validation-messages [formCtrl]="department"></validation-messages>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label>Allocated Amount *</label>
+          <input #allocated="ngModel" name="Allocated" class="form-control" [(ngModel)]="ledger.totalAllocatedAmount" maxlength="50" required />
+          <validation-messages [formCtrl]="allocated"></validation-messages>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label>Payment Amount *</label>
+          <input #paymentAmount="ngModel" name="Payment" class="form-control" [(ngModel)]="ledger.totalPaidAmount" maxlength="50" required />
+          <validation-messages [formCtrl]="paymentAmount"></validation-messages>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label>Activity *</label>
+          <input #activity="ngModel" name="Activity" class="form-control" [(ngModel)]="ledger.activity" maxlength="150" rows="50" cols="10" required />
+          <validation-messages [formCtrl]="activity"></validation-messages>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="form-group">
+          <label>Remark *</label>
+          <input #remark="ngModel" name="Remark" class="form-control" [(ngModel)]="ledger.remarks" maxlength="150" rows="50" cols="10" required />
+          <validation-messages [formCtrl]="remark"></validation-messages>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <button type="submit" pButton icon="fa-check"  label="Submit"></button>
+      <button type="button" pButton icon="fa-close" (click)="display=false" label="Cancel"></button>
+    </p-footer>
+    </form>
+</p-dialog>

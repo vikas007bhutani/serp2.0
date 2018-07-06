@@ -1,0 +1,77 @@
+<div id="intro" class="view hm-black-strong">
+    <div class="full-bg-img">
+      <div class="row mt-3">
+          <div class="col-12">            
+            <img src="../assets/icons/tracolearn_Logo_Freeform.PNG" class="mx-auto d-block"  alt="placeholder">
+          </div>
+      </div>
+      <hr class="hr-light">
+      <div class="row">
+        <div class="col-2"></div>
+          <div class="col-8">
+              <!-- Login form -->
+          <form *ngIf="loginVisible" [@slideInOut] [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <p class="h5 text-center white-text mb-4">Sign in</p>
+      
+            <div class="md-form">
+              <i class="fa fa-users prefix white-text"></i>
+              <input type="text" class="white-text" formControlName="schoolId"  [(ngModel)]="schoolId" id="schoolId" class="form-control" mdbInputDirective >
+              <label class="white-text" [class.active]="schoolId && schoolId.length > 0" for="schoolId">Your School Code</label>
+            </div>
+
+            <div class="md-form">
+              <i class="fa fa-user prefix white-text"></i>
+              <input type="text" class="white-text" formControlName="userName" id="userName" [(ngModel)]="userName" class="form-control" mdbInputDirective>
+              <label class="white-text" [class.active]="userName && userName.length > 0" for="userName">Your User Name</label>
+            </div>
+      
+            <div class="md-form">
+              <i class="fa fa-lock prefix white-text"></i>
+              <input class="white-text" type="password" formControlName="password" id="password" [(ngModel)]="password" class="form-control" mdbInputDirective>
+              <label class="white-text" [class.active]="password && password.length > 0" for="password">Your password</label>
+            </div>
+      
+            <div class="text-center">
+              <input type="submit" class="btn btn-default waves-light" value="Login">
+            </div>
+            <div class="modal-footer">
+              <p class="font-small grey-text d-flex justify-content-end">Not a member? <a (click)="showSignUp()" class="blue-text ml-1"> Sign Up</a></p>
+          </div>
+          </form>
+      <!-- Login form -->
+
+                  <!-- SignUp form -->
+                  <form *ngIf="signUpVisible" [@slideInOut] [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+                    <p class="h5 text-center white-text mb-4">Sign Up</p>
+              
+                    <div class="md-form">
+                      <i class="fa fa-users prefix white-text"></i>
+                      <input type="text" class="white-text" formControlName="schoolIdForSignUp"  [(ngModel)]="schoolIdForSignUp" id="schoolIdForSignUp" class="form-control" mdbInputDirective >
+                      <label class="white-text" [class.active]="schoolIdForSignUp && schoolIdForSignUp.length > 0" for="schoolIdForSignUp">Enter School Code</label>
+                    </div>
+        
+                    <div class="md-form">
+                      <i class="fa fa-user prefix white-text"></i>
+                      <input type="text" class="white-text" formControlName="userNameForSignUp" id="userNameForSignUp" [(ngModel)]="userNameForSignUp" class="form-control" mdbInputDirective>
+                      <label class="white-text" [class.active]="userNameForSignUp && userNameForSignUp.length > 0" for="userNameForSignUp">Enter User Name</label>
+                    </div>
+              
+                    <div class="md-form">
+                      <i class="fa fa-lock prefix white-text"></i>
+                      <input class="white-text" type="password" formControlName="passwordForSignUp" id="passwordForSignUp" [(ngModel)]="passwordForSignUp" class="form-control" mdbInputDirective>
+                      <label class="white-text" [class.active]="passwordForSignUp && passwordForSignUp.length > 0" for="passwordForSignUp">Enter password</label>
+                    </div>
+              
+                    <div class="text-center">
+                      <input type="submit" class="btn btn-default waves-light" value="SignUp">
+                    </div>
+                    <div class="modal-footer">
+                      <p class="font-small grey-text d-flex justify-content-end">Back To <a (click)="showLogin()" class="blue-text ml-1"> Login</a></p>
+                  </div>
+                  </form>
+              <!-- SignUp form -->
+          </div>
+      </div>
+    </div>
+</div>
+

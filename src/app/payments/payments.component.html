@@ -1,0 +1,95 @@
+<div>
+  <div class="m-subheader">
+    <div class="d-flex align-items-center">
+      <div class="mr-auto col-sm-12 col-md-8">
+        <h3 class="m-subheader__title m-subheader__title--separator">
+          <span>Payments</span>
+        </h3>
+      </div>
+      <div class="col-sm-12 col-md-2">
+        <button (click)="raisePayment.show()"
+                class="ui-button ui-widget ui-corner-all ui-button-text-icon-left">
+          <span class="ui-button-icon-left fa fa-fw fa-plus"></span>
+          <span class="ui-button-text">Raise Payment</span>
+        </button>
+      </div>
+      <div class="col-sm-12 col-md-2 text-right">
+        <select (change)="changeView($event.target.value)"
+                class="form-control" [(ngModel)]="selectedViewOption">
+          <option *ngFor="let option of viewOptions" value={{option.id}}>
+            {{option.label}}
+          </option>
+        </select>
+      </div>
+    </div>
+    </div>
+  <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+        <div class="row align-items-center">
+          <!--<Primeng-Datatable-Start>-->
+          <div class="primeng-datatable-container">
+            <p-dataTable #dataTable
+                         (onLazyLoad)="getPayments($event)"
+                         [value]="primengDatatableHelper.records"
+                         rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                         [paginator]="false"
+                         [lazy]="true"
+                         emptyMessage="No Data"
+                         scrollable="true"
+                         ScrollWidth="99%"
+                         responsive="primengDatatableHelper.isResponsive"
+                         resizableColumns="primengDatatableHelper.resizableColumns"
+                         [loading]="primengDatatableHelper.isLoading"
+                         loadingIcon="fa-spinner">
+
+              <p-column field="invoiceNumber" header="Invoice Number"></p-column>
+              <p-column field="studentName" header="Student Name"></p-column>
+              <p-column field="class" header="Class"></p-column>
+              <p-column field="section" header="Section"></p-column>
+              <p-column field="rollNumber" header="Roll Number"></p-column>
+              <p-column field="month" header="Month"></p-column>
+              <p-column field="totalFees" header="Total Fee Paid"></p-column>
+              <p-column field=""
+                        header="Actions"
+                        [sortable]="false"
+                        [style]="{'width':'130px','text-align':'center'}">
+                <ng-template let-record="rowData" pTemplate="body">
+                  <a *ngIf="displayCancel(record)" title="Cancel" (click)="confirmCancelPayment($event)"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                </ng-template>
+              </p-column>
+              <p-column field=""
+                        header=""
+                        [sortable]="false"
+                        [style]="{'width':'130px','text-align':'center'}">
+                <ng-template let-record="rowData" pTemplate="body">
+                   
+  <button pButton type="button" (click)="InvoiceComponent.show(record)" label="Invoice" ></button>
+   
+                </ng-template>
+              </p-column>
+
+            </p-dataTable>
+            <div class="primeng-paging-container">
+              <p-paginator rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                           #paginator
+                           (onPageChange)="getPayments($event)"
+                           [totalRecords]="primengDatatableHelper.totalRecordsCount"
+                           [rowsPerPageOptions]="primengDatatableHelper.predefinedRecordsCountPerPage">
+              </p-paginator>
+
+              <span class="total-records-count">
+                Total: {{primengDatatableHelper.totalRecordsCount}}
+              </span>
+            </div>
+            <p-confirmDialog header="Confirmation"
+                             icon="fa fa-question-circle" width="400">
+            </p-confirmDialog>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-invoice #InvoiceComponent  ></app-invoice>
+<raise-payment (payed)="onPayed($event)" #raisePayment></raise-payment>

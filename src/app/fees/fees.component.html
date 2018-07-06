@@ -1,0 +1,173 @@
+<div>
+  <div class="m-subheader">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto col-sm-12 col-md-8">
+              <h3 class="m-subheader__title m-subheader__title--separator">
+                <span>Fee Allocation</span>
+              </h3>
+            </div>
+  <div class="col-sm-12 col-md-2 text-right">
+          <select (change)="onSelect($event.target.value)" class="form-control" [(ngModel)]="selectedclass">
+                  <option value="0">-- Select Class --</option>
+            <option *ngFor="let option of iclass" value={{option.id}}>
+              {{option.value}}
+            </option>
+          </select>
+  </div>  
+  </div>
+  </div>
+  <div class="m-content">
+          <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+      
+              <div class="row align-items-center">
+                <!--<Primeng-Datatable-Start>-->
+                <div class="primeng-datatable-container">
+  <p-table   [loading]="primengDatatableHelper.isLoading"
+                         loadingIcon="fa-spinner" emptyMessage="No Data"  [value]="ifee.result[0].feevalues">
+      <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of ifee.result[0].header" >{{col.feeType}}</th>
+              </tr>
+      </ng-template>
+      <ng-template   pTemplate="body" let-rowData >
+          <tr>
+                  <td pEditableColumn  >
+                          <p-cellEditor>
+                                  <ng-template di pTemplate="input">
+                                      <input disabled="true"  type="text" [(ngModel)]="rowData.month[9].monthid">
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{rowData.month[0].monthid  | monthname}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+              <td pEditableColumn >
+              <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input type="text" [(ngModel)]="rowData.month[0].value">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{rowData.month[0].value}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+              <td pEditableColumn >
+              <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input type="text" [(ngModel)]="rowData.month[1].value">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{rowData.month[1].value}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+              <td pEditableColumn >
+                  <p-cellEditor>
+                          <ng-template pTemplate="input">
+                              <input type="text" [(ngModel)]="rowData.month[2].value">
+                          </ng-template>
+                          <ng-template pTemplate="output">
+                              {{rowData.month[2].value}}
+                          </ng-template>
+                      </p-cellEditor>
+                  </td>
+                  <td pEditableColumn >
+                      <p-cellEditor>
+                              <ng-template pTemplate="input">
+                                  <input type="text" [(ngModel)]="rowData.month[3].value">
+                              </ng-template>
+                              <ng-template pTemplate="output">
+                                  {{rowData.month[3].value}}
+                              </ng-template>
+                          </p-cellEditor>
+                      </td>
+                      <td pEditableColumn >
+                          <p-cellEditor>
+                                  <ng-template pTemplate="input">
+                                      <input type="text" [(ngModel)]="rowData.month[4].value">
+                                  </ng-template>
+                                  <ng-template pTemplate="output">
+                                      {{rowData.month[4].value}}
+                                  </ng-template>
+                              </p-cellEditor>
+                          </td>
+                          <td pEditableColumn >
+                              <p-cellEditor>
+                                      <ng-template pTemplate="input">
+                                          <input type="text" [(ngModel)]="rowData.month[5].value">
+                                      </ng-template>
+                                      <ng-template pTemplate="output">
+                                          {{rowData.month[5].value}}
+                                      </ng-template>
+                                  </p-cellEditor>
+                              </td>
+                              <td pEditableColumn >
+                                  <p-cellEditor>
+                                          <ng-template pTemplate="input">
+                                              <input type="text" [(ngModel)]="rowData.month[6].value">
+                                          </ng-template>
+                                          <ng-template pTemplate="output">
+                                              {{rowData.month[6].value}}
+                                          </ng-template>
+                                      </p-cellEditor>
+                                  </td>
+                                  <td pEditableColumn >
+                                      <p-cellEditor>
+                                              <ng-template pTemplate="input">
+                                                  <input type="text" [(ngModel)]="rowData.month[7].value">
+                                              </ng-template>
+                                              <ng-template pTemplate="output">
+                                                  {{rowData.month[7].value}}
+                                              </ng-template>
+                                          </p-cellEditor>
+                                      </td>
+                                      <td pEditableColumn >
+                                          <p-cellEditor>
+                                                  <ng-template pTemplate="input">
+                                                      <input type="text" [(ngModel)]="rowData.month[8].value">
+                                                  </ng-template>
+                                                  <ng-template pTemplate="output">
+                                                      {{rowData.month[8].value}}
+                                                  </ng-template>
+                                              </p-cellEditor>
+                                          </td>
+                                          <td pEditableColumn >
+                                              <p-cellEditor>
+                                                      <ng-template pTemplate="input">
+                                                          <input type="text" [(ngModel)]="rowData.month[9].value">
+                                                      </ng-template>
+                                                      <ng-template pTemplate="output">
+                                                          {{rowData.month[9].value}}
+                                                      </ng-template>
+                                                  </p-cellEditor>
+                                              </td>
+                                              
+                                                     </tr>
+      </ng-template>
+          
+  </p-table>
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <br>
+  <div class="col-sm-12 col-md-2 text-right">
+  <button pButton type="button" (click)="OnUpdate(ifee.result[0].feevalues)" label="Submit" ></button>
+  </div>
+  </div>
+  <!-- <p-dropdown [options]="iclass" [(ngmodel)]="selectedclass" (onChange)="changedvalue(selectedclass)"  [showClear]="true" optionLabel="value"></p-dropdown>
+  <p>Selected City: {{selectedclass ? selectedclass.value : 'none'}}</p> -->
+  
+ 
+  <!-- <br>
+  <button pButton type="button" (click)="InvoiceComponent.show(ifee.result[0].feevalues)" label="showprint" ></button>
+   -->
+  <!-- <button pButton type="button" (click)="printinvoice.show()" label="Primary" >print</button> -->
+  <!-- <app-invoice #InvoiceComponent  ></app-invoice> -->
+  <!-- <div id="print-section">
+         <h1>nothing</h1>
+        </div> -->
+  

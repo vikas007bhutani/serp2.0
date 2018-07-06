@@ -1,0 +1,158 @@
+<div>
+  <div class="m-subheader">
+    <div class="d-flex align-items-center">
+      <div class="mr-auto col-sm-12 col-md-8">
+        <h3 class="m-subheader__title m-subheader__title--separator">
+          <span>Payment History</span>
+        </h3>
+      </div>    
+    </div>
+  </div>
+  <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+        <p-tabView>
+          <p-tabPanel header="Classes">
+            <div class="d-flex align-items-center">
+              <div class="mr-auto col-sm-12 col-md-8"></div>
+                <div class="col-sm-12 col-md-2 text-right">
+                  <select (change)="onClassSelect($event.target.value)" class="form-control" [(ngModel)]="classid">
+                    <option *ngFor="let option of classes" value={{option.id}}>
+                      {{option.value}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-sm-12 col-md-2 text-right">
+                  <select (change)="onSectionSelect($event.target.value)" class="form-control" [(ngModel)]="sectionid">
+                    <option *ngFor="let option of sections" value={{option.id}}>
+                      {{option.value}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <!--<Primeng-Datatable-Start>-->
+                <div class="primeng-datatable-container">
+                  <p-dataTable #dataTable
+                               (onLazyLoad)="getPaymenthistory($event)"
+                               [value]="primengDatatableHelper.records"
+                               rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                               [paginator]="false"
+                               [lazy]="true"
+                               emptyMessage="No Records Found."
+                               scrollable="true"
+                               ScrollWidth="80%"
+                               responsive="primengDatatableHelper.isResponsive"
+                               resizableColumns="primengDatatableHelper.resizableColumns"
+                               [loading]="primengDatatableHelper.isLoading"
+                               loadingIcon="fa-spinner"
+                               frozenWidth="100px"
+                               expandableRows="true">
+
+
+                    <p-column field="userCode" header="User Code">
+                      <ng-template let-row="rowData" pTemplate="body">
+                        <a style="color:blue;" (click)="studentRecord.show(row)">{{row.userCode}}</a>
+                      </ng-template>
+                    </p-column>
+                    <p-column field="firstName" header="First Name"></p-column>
+                    <p-column field="lastName" header="Last Name"></p-column>
+                    <p-column field="className" header="Class Name"></p-column>
+                    <p-column field="sectionName" header="Section Name"></p-column>
+                    <p-column field="rollNumber" header="Roll Number"></p-column>
+                    <p-column *ngIf="admin" field="name" header="Update/View"></p-column>
+                    <p-column *ngIf="admin" field="surname" header="Account Status"></p-column>
+
+
+                  </p-dataTable>
+                  <div class="primeng-paging-container">
+                    <p-paginator rows="{{primengDatatableHelper.defaultRecordsCountPerPage}}"
+                                 #paginator
+                                 (onPageChange)="getPaymenthistory($event)"
+                                 [totalRecords]="primengDatatableHelper.totalRecordsCount"
+                                 [rowsPerPageOptions]="primengDatatableHelper.predefinedRecordsCountPerPage">
+                    </p-paginator>
+                    <span class="total-records-count">
+                      Total: {{primengDatatableHelper.totalRecordsCount}}
+                    </span>
+                  </div>
+                </div>
+                <!--<Primeng-Datatable-End>-->
+              </div>
+
+</p-tabPanel>
+          <p-tabPanel header="Students">
+            <div class="d-flex align-items-center">
+              <div class="mr-auto col-sm-14 col-md-8"></div>
+              <div class="col-sm-12 col-md-2 text-right">
+                <select (change)="onUserCodeSelect($event.target.value)" class="form-control" [(ngModel)]="usercode">
+                  <option *ngFor="let option of userCodes" value={{option.id}}>
+                    {{option.value}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-12 col-md-2 text-right">
+                <input #filterText="ngModel" name="filterText" class="form-control" [(ngModel)]="searchText" />
+                
+              </div>
+              <div class="col-sm-12 col-md-2 text-left">
+                <a (click)="searchStudentRecords()"><i class="fa fa-search-plus" aria-hidden="true"></i></a>
+              </div>
+              </div>
+              <div class="row align-items-center">
+                <!--<Primeng-Datatable-Start>-->
+                <div class="primeng-datatable-container">
+                  <p-dataTable #studentDataTable
+                               (onLazyLoad)="getStudenthistory($event)"
+                               [value]="primengStudentDatatableHelper.records"
+                               rows="{{primengStudentDatatableHelper.defaultRecordsCountPerPage}}"
+                               [paginator]="false"
+                               [lazy]="true"
+                               emptyMessage="No Records Found."
+                               scrollable="true"
+                               ScrollWidth="80%"
+                               responsive="primengStudentDatatableHelper.isResponsive"
+                               resizableColumns="primengStudentDatatableHelper.resizableColumns"
+                               [loading]="primengStudentDatatableHelper.isLoading"
+                               loadingIcon="fa-spinner"
+                               frozenWidth="100px"
+                               expandableRows="true">
+
+
+                    <p-column field="userCode" header="User Code">
+                      <ng-template let-row="rowData" pTemplate="body">
+                        <a style="color:blue;" (click)="studentRecord.show(row)">{{row.userCode}}</a>
+                      </ng-template>
+                    </p-column>
+                    <p-column field="firstName" header="First Name"></p-column>
+                    <p-column field="lastName" header="Last Name"></p-column>
+                    <p-column field="className" header="Class Name"></p-column>
+                    <p-column field="sectionName" header="Section Name"></p-column>
+                    <p-column field="rollNumber" header="Roll Number"></p-column>
+                    <p-column *ngIf="admin" field="name" header="Update/View"></p-column>
+                    <p-column *ngIf="admin" field="surname" header="Account Status"></p-column>
+
+
+                  </p-dataTable>
+                  <div class="primeng-paging-container">
+                    <p-paginator rows="{{primengStudentDatatableHelper.defaultRecordsCountPerPage}}"
+                                 #studentpaginator
+                                 (onPageChange)="getStudenthistory($event)"
+                                 [totalRecords]="primengStudentDatatableHelper.totalRecordsCount"
+                                 [rowsPerPageOptions]="primengStudentDatatableHelper.predefinedRecordsCountPerPage">
+                    </p-paginator>
+                    <span class="total-records-count">
+                      Total: {{primengStudentDatatableHelper.totalRecordsCount}}
+                    </span>
+                  </div>
+                </div>
+                <!--<Primeng-Datatable-End>-->
+              </div>
+</p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+
+  <student-payment-history #studentRecord></student-payment-history>
+</div>

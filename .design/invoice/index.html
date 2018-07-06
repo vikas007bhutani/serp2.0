@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<link type="text/css" rel="stylesheet" href="bootstrap.min.css" media="screen, projection, print">
+	<link type="text/css" rel="stylesheet" href="invoice.css" media="screen, projection, print">
+	<title>ABC School Fee Invoice</title>
+</head>
+<body>
+	
+	<div class="container" style="margin-top: 4vh; margin-bottom: 4vh;">
+		<div class="row">	
+			<div id="invoice" class="well offset-sm-2 col-sm-8" >
+		
+				<div class="row">
+					<div class="col-sm-2">
+						<img id="schoolLogo" src="assets/school.png" alt="School Logo" />						
+					</div>
+					<div class="col-sm-10">
+						<h1 id="schoolName">
+							ABC International School
+						</h1>
+						<p id="schoolAddress" class="smallText">
+							D-58, Rajendra Nagar, New Delhi, Delhi, 110001
+						</p>
+						<p id="affnWeb" class="smallText">
+							<span id="affiliation">Affiliation : </span><span id="affiliationNo">2451475</span>
+						</p>
+						<p id="phoneEmail" class="smallText">
+							<span class="icon"><img src="assets/mobile.svg"></span>	
+							<span id="phone">011 1245 1245</span>
+							
+							<span class="icon"><img src="assets/email.svg"></span>		
+							<span id="email">info@abcschool.com</span>
+						</p>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div id="invoiceMain" class="col-sm-12">
+						<div class="row">
+							<div id="left" class="col-sm-6">
+								<p class="details">
+									<label class="field">Student ID</label>
+									<span class="seperator">:</span>
+									<span class="value">012451</span>
+								</p>
+								<p class="details">
+									<label class="field">Student's Name</label>
+									<span class="seperator">:</span>
+									<span class="value">Aakash Kumar</span>
+								</p>
+								<p class="details">
+									<label class="field">Class</label>
+									<span class="seperator">:</span>
+									<span class="value">09</span>
+								</p>
+								<p class="details">
+									<label class="field">Section</label>
+									<span class="seperator">:</span>
+									<span class="value">B</span>
+								</p>
+								<p class="details">
+									<label class="field">Roll No.</label>
+									<span class="seperator">:</span>
+									<span class="value">25</span>
+								</p>
+								<p class="details">
+									<label class="field">Father's Name</label>
+									<span class="seperator">:</span>
+									<span class="value">Raj Verma</span>
+								</p>
+							</div>
+							
+							<div id="right" class="col-sm-6">
+								<p class="details">
+									<label class="field">Invoice No.</label>
+									<span class="seperator">:</span>
+									<span class="value">754854</span>
+								</p>
+								<p class="details">
+									<label class="field">Date</label>
+									<span class="seperator">:</span>
+									<span class="value">08 June, 2018</span>
+								</p>
+								<p class="details">
+									<label class="field">Month</label>
+									<span class="seperator">:</span>
+									<span class="value">May, June</span>
+								</p>
+								<p class="details">
+									<label class="field">Mode</label>
+									<span class="seperator">:</span>
+									<span class="value">Cash</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div id="feeTable" class="col-sm-12">
+						<table class="table table-bordered">
+  							<thead class="thead-light">
+  							  <tr>
+  							    <th scope="col">FEE Type</th>
+  							    <th scope="col" type="value">Amount</th>
+  							    <th scope="col" type="value">Previous Dues</th>
+  							  </tr>
+  							</thead>
+  							<tbody>
+  								<tr>
+  							    	<th scope="row">Tution Fee</th>
+  							    	<td>1800</td>
+  							    	<td>600</td>
+  							  	</tr>
+  							 	<tr>
+  							    	<th scope="row">Exam Fee</th>
+  							    	<td>400</td>
+  							    	<td></td>
+  							  	</tr>
+								<tr>
+  							    	<th scope="row">Admission Fee</th>
+  							    	<td></td>
+  							    	<td></td>
+  							 	</tr>
+  							  	<tr>
+  							    	<th scope="row">Transport Charges</th>
+  							    	<td></td>
+  							    	<td></td>
+  							 	</tr>
+								<tr>
+  							    	<th scope="row">Computer</th>
+  							    	<td></td>
+  							    	<td></td>
+  							 	</tr>
+  							  	<tr>
+  							    	<th scope="row">Development</th>
+  							    	<td></td>
+  							    	<td></td>				
+  							  	</tr>
+								<tr>
+  							    	<th scope="row">Total</th>
+  							    	<td>2200</td>
+  							    	<td>600</td>		
+  							  	</tr>
+  							</tbody>
+						</table>
+						<p id="grandTotal" style="padding: 0.6rem;">
+							<span id="total">Grand Total : </span>
+							<span id="totalValue" style="float:right; font-weight: 500;">2800</span>
+						</p>
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div id="footer" class="col-sm-12">
+						<p id="cashier">
+							<span type="cashier">Cashier :</span>
+							<span id="cashierName">Rajesh</span>
+						</p><hr>
+						<p id="bottom">
+							This is a computer generated invoice, no signature is required.
+						</p>
+					</div>
+				</div>
+		
+			</div>
+		
+		</div>	
+	</div>	
+</body>
+</html>

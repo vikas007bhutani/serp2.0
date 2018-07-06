@@ -1,0 +1,12 @@
+SERP Color Guidelines
+
+---Brand---
+
+1. Primary Color Dark - #3264FA
+2. Primary Color Light - #62BFED
+
+---Text---
+
+1. Heading - #222222
+2. Heading Small - #000000
+3. SubHeading - #444444
